@@ -13,3 +13,24 @@ class Project(BaseModel):
     date_finish: datetime
     date_created: datetime
     date_modified: datetime
+
+
+""" 
+Format
+
+{
+    "name": {
+        "en": "",
+        "es": ""
+    },
+    "description": {
+        "en": "",
+        "es": ""
+    },
+    "technologies_used": [
+        ""
+    ],
+    "date_start": "",
+    "date_finish": "",
+}
+"""

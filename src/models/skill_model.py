@@ -6,12 +6,23 @@ from enum import Enum
 
 class Skill(BaseModel):
     class ProficiencyEnum(str, Enum):
-        beginner = 'beginner'
-        intermediate = 'intermediate'
-        advanced = 'advanced'
+        beginner = 'Beginner'
+        intermediate = 'Intermediate'
+        advanced = 'Advanced'
 
     id: str
-    name: Dict[str, str]
+    name: str
     proficiency: ProficiencyEnum
     date_created: datetime
     date_modified: datetime
+
+
+""" 
+Format
+
+{
+    "name": "Javascript",
+    "proficiency": "Intermediate"
+},
+
+"""

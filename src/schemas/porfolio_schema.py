@@ -47,3 +47,7 @@ class PorfolioNormalData(BaseModel):
     description: Dict[str, str]
     country: str
     province: str
+
+class PorfolioData(BaseModel):
+    projects: List[Project] = None
+    skills: List[Skill] = None
