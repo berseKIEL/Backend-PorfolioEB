@@ -15,10 +15,6 @@ class PorfolioUserService():
             email=user.email,
             username=user.username,
             password=get_password(user.password),
-
-            # Creation
-            date_creation=datetime.utcnow(),
-            date_modified=datetime.utcnow()
         )
         await user_in.save()
         return user_in

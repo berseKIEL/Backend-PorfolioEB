@@ -7,6 +7,13 @@ from typing import List
 
 porfolio_router = APIRouter()
 
+# Porfolio Router
+""" 
+Post Porfolio (Crea un nuevo usuario para su porfolio)
+Get User (Consigue un usuario)
+Get User via ID (Consigue un usuario por su id)
+"""
+
 
 @porfolio_router.post('/create', summary="Crear un nuevo porfolio", response_model=UserPorfolioSchemaOut)
 async def create_porfolio(data: UserPorfolioSchemaIn):
