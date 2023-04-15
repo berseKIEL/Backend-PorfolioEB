@@ -1,5 +1,5 @@
 from typing import List, Dict
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel
 from datetime import datetime
 from enum import Enum
 
@@ -10,11 +10,11 @@ class Skill(BaseModel):
         intermediate = 'Intermediate'
         advanced = 'Advanced'
 
-    id: str
     name: str
     proficiency: ProficiencyEnum
-    date_created: datetime
-    date_modified: datetime
+
+    date_created: datetime = datetime.now()
+    date_modified: datetime = datetime.now()
 
 
 """ 

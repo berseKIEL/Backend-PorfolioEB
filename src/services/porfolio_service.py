@@ -6,6 +6,7 @@ class PorfolioService():
     @staticmethod
     async def get_all_porfolio() -> List[Porfolio]:
         portfolio = await Porfolio.all().to_list()
+        print(portfolio)
         return portfolio
     
     @staticmethod

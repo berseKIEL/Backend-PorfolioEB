@@ -1,18 +1,18 @@
-from typing import List, Dict
-from pydantic import BaseModel, Field, validator
+from typing import List, Dict, Optional
+from pydantic import BaseModel
 from datetime import datetime
 
 
 class Project(BaseModel):
-    id: str
     name: Dict[str, str]
     description: Dict[str, str]
     technologies_used: List[str]
-    repo_link: str
+    repo_link: Optional[str]
     date_start: datetime
-    date_finish: datetime
-    date_created: datetime
-    date_modified: datetime
+    date_finish: Optional[datetime] = None
+
+    date_created: datetime = datetime.now()
+    date_modified: datetime = datetime.now()
 
 
 """ 

@@ -28,8 +28,8 @@ class Porfolio(Document):
     skills: Optional[List[Skill]] = None
 
     # Creation
-    date_creation: datetime
-    date_modified: datetime
+    date_created: datetime = datetime.now()
+    date_modified: datetime = datetime.now()
 
     def __repr__(self) -> str:
         return f"<Porfolio {self.username}>"

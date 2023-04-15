@@ -24,6 +24,6 @@ async def get_all_porfolio():
     return await PorfolioService.get_all_porfolio()
 
 
-@porfolio_router.get('/get', summary="Obtiene la información de un solo porfolio especificado de un usuario", response_model=PorfolioSchema)
+@porfolio_router.get('/get/id', summary="Obtiene la información de un solo porfolio especificado de un usuario", response_model=PorfolioSchema)
 async def get_porfolio():
     return await PorfolioService.get_porfolio()
