@@ -23,15 +23,25 @@ class PorfolioUserService():
         return user_in
 
     @staticmethod
-    async def authenticate(email: str, password: str) -> Optional[Porfolio]:
-        user = await PorfolioUserService.get_user_by_email(email=email)
+    async def authenticate(useroremail: str, password: str) -> Optional[Porfolio]:
+        # Obtener usuario por email
+        user = await PorfolioUserService.get_user_by_email(email=useroremail)
         if not user:
-            return None
+            # Obtener usuario por correo
+            user = await PorfolioUserService.get_user_by_username(username=useroremail)
+            if not user:
+                return None
+        
         if not verify_password(password=password, hashed_password=user.password):
             return None
+        
         return user
 
     @staticmethod
     async def get_user_by_email(email: str) -> Optional[Porfolio]:
         user = await Porfolio.find_one(Porfolio.email == email)
         return user
+
+    @staticmethod
+    async def get_user_by_username(username:str) -> Optional[Porfolio]:
+        user = await Porfolio.find_one(Porfolio.username == username)
