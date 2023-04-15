@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from models.porfolio import Porfolio
-from config.db import conn
+from config.connection import conn
 from schemas.porfolio import porfolioEntity
 
 porfolio = APIRouter()
