@@ -1,8 +1,11 @@
 from pydantic import BaseModel
 from typing import List, Dict
 from datetime import datetime
+from project import Project
+from skill import Skill
 
 class Porfolio(BaseModel):
+    id: str
     # Login
     username: str
     email: str
@@ -14,18 +17,13 @@ class Porfolio(BaseModel):
     title: Dict[str, str]
     phone: str
     description: str
-    county: str
+    country: str
     province: str
         
     # Porfolio
-    projects: List[Dict[str, str]]
-    skills: List[Dict[str, str]]
+    projects: List[Project]
+    skills: List[Skill]
     
     # Creation
     date_creation: datetime
     date_modified: datetime
-    
-    class Config:
-        json_encoders = {
-            ObjectId: str
-        }
