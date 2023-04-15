@@ -50,8 +50,9 @@ class Porfolio(Document):
         return self.id.generation_time
 
     @classmethod
-    async def by_email(self, email: str) -> "Porfolio":
-        return await self.find_one(self.email == email)
+    async def by_email(cls, email: str) -> "Porfolio":
+        return await cls.find_one(cls.email == email)
 
-    async def by_username(self, username: str) -> "Porfolio":
-        return await self.find_one(self.username == username)
+    @classmethod
+    async def by_username(cls, username: str) -> "Porfolio":
+        return await cls.find_one(cls.username == username)

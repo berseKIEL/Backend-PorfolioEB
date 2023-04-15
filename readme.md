@@ -5,8 +5,8 @@ Python - Framework Fast API
 Crear porfolio
 
 POST
-```json
 /api/v1/porfolio/create
+```json
 {
   "email": "exebarco280320@gmail.com",
   "username": "exebarco",
@@ -31,5 +31,5 @@ POST
 /api/v1/auth/login
 ```
 "email": "exebarco280320@gmail.com",
-"password": "passwordtesting"
+"password": "asdf1234"
 ```
