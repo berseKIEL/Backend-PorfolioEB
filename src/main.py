@@ -1,8 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
 from routes.porfolio import Porfolio
+
 app = FastAPI()
+
 
 origins = [
     "http://localhost",
