@@ -8,7 +8,8 @@ from motor.motor_asyncio import AsyncIOMotorClient
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
-    openapi_url=f'{settings.API_V1_ROUTE}/openapi.json'
+    openapi_url=f'{settings.API_V1_ROUTE}/openapi.json',
+    debug=True
 )
 
 origins = [

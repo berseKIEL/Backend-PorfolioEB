@@ -16,3 +16,5 @@ class UserPorfolioSchemaOut(BaseModel):
     porfolio_id: UUID
     email: str
     username: str
+
+

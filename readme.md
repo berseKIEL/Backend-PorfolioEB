@@ -10,7 +10,7 @@ POST
 {
   "email": "exebarco280320@gmail.com",
   "username": "exebarco",
-  "password": "passwordtesting",
+  "password": "asdf1234",
   "first_name": "Exequiel",
   "last_name": "Barco",
   "title": {
