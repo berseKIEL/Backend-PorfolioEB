@@ -24,41 +24,51 @@ db.Porfolio.insertOne(
 
         skills: [
             {
+                    
+                _id: ObjectId(),
                 name: "Javascript",
                 proficiency: "Intermediate",
             },
-            {
+            {   
+                _id: ObjectId(),
                 name: "Python",
                 proficiency: "Intermediate",
             },
-            {
+            {   
+                _id: ObjectId(),
                 name: "React",
                 proficiency: "Intermediate",
             },
-            {
+            {   
+                _id: ObjectId(),
                 name: "NextJS",
                 proficiency: "Beginner",
             },
-            {
+            {   
+                _id: ObjectId(),
                 name: "ExpressJS",
                 proficiency: "Intermediate",
             },
-            {
+            {   
+                _id: ObjectId(),
                 name: "MySQL",
                 proficiency: "Intermediate",
             },
-            {
+            {   
+                _id: ObjectId(),
                 name: "MongoDB",
                 proficiency: "Intermediate",
             },
-            {
+            {   
+                _id: ObjectId(),
                 name: "Sequelize",
                 proficiency: "Intermediate",
             },
         ],
 
         projects: [
-            {
+            {   
+                _id: ObjectId(),
                 company: "Vitrinia",
                 name: {
                     en: "Vitrinia",
@@ -74,7 +84,8 @@ db.Porfolio.insertOne(
                 date_start: "2022-12-11T00:00:00.000Z",
                 date_finish: null,
             },
-            {
+            {   
+                _id: ObjectId(),
                 company: "ISPP",
                 name: {
                     es: "Sistema de Gestión Academica",
@@ -90,7 +101,8 @@ db.Porfolio.insertOne(
                 date_start: "2022-12-20T00:00:00.000Z",
                 date_finish: null,
             },
-            {
+            {   
+                _id: ObjectId(),
                 company: "RAASE",
                 name: {
                     es: "Sistema de Derivación de Pacientes",
@@ -106,7 +118,8 @@ db.Porfolio.insertOne(
                 date_start: "2022-12-20T00:00:00.000Z",
                 date_finish: null,
             },
-            {
+            {   
+                _id: ObjectId(),
                 company: null,
                 name: {
                     es: "Porfolio Personal",
