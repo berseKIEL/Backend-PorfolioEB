@@ -2,18 +2,19 @@ from pydantic import BaseModel, Field
 from typing import Optional
 from uuid import UUID
 from datetime import datetime
+from src.models.skill_model import ProficiencyEnum
 
 class SkillCreate(BaseModel):
     name: str = Field(..., title="Name", min_length=2, max_length=50)
-    level: int = Field(..., title="Level")
+    profiency: ProficiencyEnum = Field(..., title="Proficiency")
 
 
 class SkillUpdate(BaseModel):
     name: Optional[str] = Field(..., title="Name", min_length=2, max_length=50)
-    level: Optional[int] = Field(..., title="Level")
+    profiency: Optional[ProficiencyEnum] = Field(..., title="Proficiency")
     
 class SkillOut(BaseModel):
     name: str
-    level: str
+    profiency: str
     created_at: datetime
     updated_at: datetime
