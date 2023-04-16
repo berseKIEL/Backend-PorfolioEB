@@ -13,6 +13,18 @@ class UserSchemaIn(BaseModel):
                           description="Password")
 
 
+class UpdateUser(BaseModel):
+    email: str
+    username: str
+    first_name: str
+    last_name: str
+    title: Dict[str, str]
+    phone: str
+    description: str
+    country: str
+    province: str
+
+
 class UserSchemaOut(BaseModel):
     user_id: UUID
     email: str

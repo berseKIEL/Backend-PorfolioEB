@@ -3,15 +3,9 @@ from typing import Optional, List, Dict
 from uuid import UUID
 from datetime import datetime
 
-
-class DescriptionProject:
-    en: str = Field(..., title="Description EN", min_length=2, max_length=50)
-    es: str = Field(..., title="Descripción ES", min_length=2, max_length=50)
-
-
 class ProjectCreate(BaseModel):
     name: str = Field(..., title="Name", min_length=2, max_length=50)
-    description: Dict[DescriptionProject] = Field(..., title="Description")
+    description: Dict[str, str] = Field(..., title="Description")
     technologies_used: List[str]
     repo_link: str
     image_link: List[str]
@@ -21,7 +15,7 @@ class ProjectCreate(BaseModel):
 
 class ProjectUpdate(BaseModel):
     name: Optional[str] = Field(..., title="Name", min_length=2, max_length=50)
-    description: Optional[Dict[DescriptionProject]] = Field(..., title="Description")
+    description: Optional[Dict[str, str]] = Field(..., title="Description")
     technologies_used: Optional[List[str]]
     repo_link: Optional[str] = Field(..., title="Repository Link", min_length=2, max_length=120)
     image_link: Optional[List[str]]
