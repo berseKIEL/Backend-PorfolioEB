@@ -34,12 +34,12 @@ class UserService():
         return user
     
     @staticmethod
-    async def get_user(useroremail: str) -> Optional[User]:
+    async def get_user(user: User) -> Optional[User]:
         # Obtener usuario por email
-        user = await UserService.get_user_by_email(email=useroremail)
+        user = await UserService.get_user_by_email(email=user.email)
         if not user:
             # Obtener usuario por correo
-            user = await UserService.get_user_by_username(username=useroremail)
+            user = await UserService.get_user_by_username(username=user.username)
             if not user:
                 return None
 
@@ -61,8 +61,8 @@ class UserService():
         return user
 
     @staticmethod
-    async def update_user(user_id: UUID, data: UserUpdate):
-        user = await UserService.get_user(user_id)
+    async def update_user(user: User, data: UserUpdate):
+        user = await UserService.get_user(user)
         await user.update({"$set": data.dict(exclude_unset=True)})
         await user.save()
         return user

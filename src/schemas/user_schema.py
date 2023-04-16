@@ -18,7 +18,7 @@ class UserUpdate(BaseModel):
     username: Optional[str]
     first_name: Optional[str]
     last_name: Optional[str]
-    title: Dict[str, str]
+    title: Optional[Dict[str, str]]
     phone: Optional[str]
     description: Optional[str]
     country: Optional[str]
