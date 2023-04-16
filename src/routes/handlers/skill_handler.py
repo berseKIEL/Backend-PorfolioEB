@@ -32,5 +32,5 @@ async def update_skill(skill_id: UUID, data: SkillUpdate, current_user: User = D
 
 
 @skill_router.delete('/{skill_id}', summary="Borra una habilidad de un usuario según su ID")
-async def delete_skill(skill_id, current_user: User = Depends(get_current_user)):
+async def delete_skill(skill_id: UUID, current_user: User = Depends(get_current_user)):
     return await SkillService.delete_skill(skill_id, current_user)
