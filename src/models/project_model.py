@@ -4,13 +4,13 @@ from typing import List, Dict, Optional
 from pydantic import Field
 from datetime import datetime
 from src.models.user_model import User
-
+from src.models.general_model import Translation
 
 class Project(Document):
-    project_id: UUID = Field(default_factory=uuid4)
+    project_id: UUID = Field(default_factory=uuid4, unique=True)
     owner: Link[User]
-    name: Dict[str, str]
-    description: Dict[str, str]
+    name: Optional[Translation]
+    description: Optional[Translation]
     technologies_used: List[str]
     repo_link: Optional[str]
     image_link: Optional[List[str]]

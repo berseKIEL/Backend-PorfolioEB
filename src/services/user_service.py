@@ -1,8 +1,9 @@
+from fastapi import HTTPException, status
 from src.schemas.user_schema import UserSchemaIn, UserUpdate
 from src.models.user_model import User
 from src.core.security import get_password
 from src.core.security import verify_password
-from typing import Optional
+from typing import Optional, Union
 from uuid import UUID
 
 
@@ -32,18 +33,62 @@ class UserService():
             return None
 
         return user
-    
-    @staticmethod
-    async def get_user(user: User) -> Optional[User]:
-        # Obtener usuario por email
-        user = await UserService.get_user_by_email(email=user.email)
-        if not user:
-            # Obtener usuario por correo
-            user = await UserService.get_user_by_username(username=user.username)
-            if not user:
-                return None
 
-        return user
+    @staticmethod
+    async def get_user(user: Union[str, User]) -> Optional[User]:
+        if isinstance(user, str):
+            try:
+                # obtiene usuario por username
+                user = await UserService.get_user_by_username(username=user)
+                if user:
+                    return user
+            except:
+                raise HTTPException(
+                    status_code=status.HTTP_404_NOT_FOUND,
+                    detail="No se encontro el usuario"
+                )
+
+            try:
+                # obtiene usuario por correo
+                user = await UserService.get_user_by_email(email=user)
+                if user:
+                    return user
+            except:
+                raise HTTPException(
+                    status_code=status.HTTP_404_NOT_FOUND,
+                    detail="No se encontro el usuario"
+                )
+
+            return None
+        elif isinstance(user, User):
+            try:
+                # obtiene usuario por correo
+                user = await UserService.get_user_by_email(email=user.email)
+                if user:
+                    return user
+            except:
+                raise HTTPException(
+                    status_code=status.HTTP_404_NOT_FOUND,
+                    detail="No se encontro el usuario"
+                )
+
+            try:
+                # obtiene usuario por username
+                user = await UserService.get_user_by_username(username=user.username)
+                if user:
+                    return user
+            except:
+                raise HTTPException(
+                    status_code=status.HTTP_404_NOT_FOUND,
+                    detail="No se encontro el usuario"
+                )
+
+            return None
+        else:
+             raise HTTPException(
+                    status_code=status.HTTP_404_NOT_FOUND,
+                    detail="No se encontro el usuario"
+                )
 
     @staticmethod
     async def get_user_by_email(email: str) -> Optional[User]:
