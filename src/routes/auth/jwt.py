@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Body
 from fastapi.security import OAuth2PasswordRequestForm
 from typing import Any
-from services.user_service import UserService
+from src.services.user_service import UserService
 from src.core.security import create_access_token, create_refresh_token
 from src.schemas.auth_schema import TokenSchema
 from src.schemas.user_schema import UserSchemaOut
@@ -26,14 +26,14 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()) -> Any:
 
     # Crear accesos y refresh token
     return {
-        "access_token": create_access_token(user.porfolio_id),
-        "refresh_token": create_refresh_token(user.porfolio_id)
+        "access_token": create_access_token(user.user_id),
+        "refresh_token": create_refresh_token(user.user_id)
     }
 
 
 @auth_router.post('/check_token', summary="Prueba si el Token es valido", response_model=UserSchemaOut)
-async def check_token(porfolio: User = Depends(get_current_user)) -> str:
-    return porfolio
+async def check_token(user: User = Depends(get_current_user)) -> str:
+    return user
 
 
 @auth_router.post('/refresh', summary="Refrezca el JWT token", response_model=TokenSchema)
@@ -63,6 +63,6 @@ async def refresh_token(refresh_token: str = Body(...)):
         )
 
     return {
-        "access_token": create_access_token(user.porfolio_id),
-        "refresh_token": create_refresh_token(user.porfolio_id)
+        "access_token": create_access_token(user.user_id),
+        "refresh_token": create_refresh_token(user.user_id)
     }

@@ -1,5 +1,7 @@
 from pydantic import BaseModel, Field, EmailStr
+from typing import Dict
 from uuid import UUID
+from datetime import datetime
 
 
 class UserSchemaIn(BaseModel):
@@ -15,3 +17,10 @@ class UserSchemaOut(BaseModel):
     user_id: UUID
     email: str
     username: str
+    first_name: str = None
+    last_name: str = None
+    title: Dict[str, str] = None
+    phone: str = None
+    description: Dict[str, str] = None
+    country: str = None
+    province: str = None

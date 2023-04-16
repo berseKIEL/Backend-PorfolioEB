@@ -6,7 +6,7 @@ from src.models.user_model import User
 from jose import jwt
 from src.schemas.auth_schema import TokenPayload
 from datetime import datetime
-from services.user_service import UserService
+from src.services.user_service import UserService
 
 oauth_jwt = OAuth2PasswordBearer(
     tokenUrl=f"{settings.API_V1_ROUTE}/auth/login",

@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from src.models.porfolio_model import Porfolio
+from src.models.user_model import User
+from src.models.skill_model import Skill
+from src.models.project_model import Project
 from src.routes.router import router
 from src.core.config import settings
 from beanie import init_beanie
@@ -34,7 +36,7 @@ async def app_init():
     
     await init_beanie(
         database=db_conn,
-        document_models=[Porfolio]
+        document_models=[User, Skill, Project]
     )
         
 app.include_router(router, prefix=settings.API_V1_ROUTE)

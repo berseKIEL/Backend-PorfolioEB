@@ -1,12 +1,18 @@
-from beanie import Document
+from beanie import Document, Link, before_event, Replace, Insert
 from pydantic import Field
 from uuid import UUID, uuid4
+from src.models.user_model import User
+from datetime import datetime
+
 
 class Skill(Document):
-    skill_id: UUID = Field(default_factory=uuid4)
-    user_id: UUID
+    skill_id: UUID = Field(default_factory=uuid4, unique=True)
+    owner: Link[User]
     name: str
     level: int
+
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
 
     def __repr__(self) -> str:
         return f"<Skill {self.name}>"
@@ -21,3 +27,10 @@ class Skill(Document):
         if isinstance(other, Skill):
             return self.name == other.name
         return False
+
+    @before_event([Replace, Insert])
+    def update_updated_at(self):
+        self.updated_at = datetime.utcnow()
+
+    class Settings:
+        name = 'skills'

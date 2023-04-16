@@ -1,12 +1,14 @@
+from uuid import UUID, uuid4
+from beanie import Document, Link, before_event, Replace, Insert
 from typing import List, Dict, Optional
 from pydantic import Field
 from datetime import datetime
-from beanie import Document
-from uuid import UUID, uuid4
+from src.models.user_model import User
 
 
 class Project(Document):
     project_id: UUID = Field(default_factory=uuid4)
+    owner: Link[User]
     name: Dict[str, str]
     description: Dict[str, str]
     technologies_used: List[str]
@@ -15,8 +17,8 @@ class Project(Document):
     date_start: datetime
     date_finish: Optional[datetime] = None
 
-    date_created: datetime = datetime.now()
-    date_modified: datetime = datetime.now()
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
 
     def __repr__(self) -> str:
         return f"<Project {self.name}>"
@@ -31,3 +33,10 @@ class Project(Document):
         if isinstance(other, Project):
             return self.name == other.name
         return False
+
+    @before_event([Replace, Insert])
+    def update_updated_at(self):
+        self.updated_at = datetime.utcnow()
+
+    class Settings:
+        name = 'projects'

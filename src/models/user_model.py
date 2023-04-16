@@ -21,8 +21,8 @@ class User(Document):
     country: Optional[str] = None
     province: Optional[str] = None
 
-    date_created: datetime = datetime.now()
-    date_modified: datetime = datetime.now()
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
 
     def __repr__(self) -> str:
         return f"<User {self.username}>"
