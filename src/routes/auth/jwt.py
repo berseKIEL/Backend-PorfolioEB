@@ -1,16 +1,15 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Body
 from fastapi.security import OAuth2PasswordRequestForm
 from typing import Any
-from src.services.porfolio_user_service import PorfolioUserService
+from services.user_service import UserService
 from src.core.security import create_access_token, create_refresh_token
 from src.schemas.auth_schema import TokenSchema
-from src.schemas.porfolio_schema import UserPorfolioSchemaOut
+from src.schemas.user_schema import UserSchemaOut
 from src.schemas.auth_schema import TokenPayload
-from src.models.porfolio_model import Porfolio
+from src.models.user_model import User
 from src.routes.deps.user_deps import get_current_user
 from src.core.config import settings
 from jose import jwt
-from datetime import datetime
 from pydantic import ValidationError
 
 auth_router = APIRouter()
@@ -18,7 +17,7 @@ auth_router = APIRouter()
 
 @auth_router.post('/login', summary="Crea el acceso de la ruta para los usuarios", response_model=TokenSchema)
 async def login(form_data: OAuth2PasswordRequestForm = Depends()) -> Any:
-    user = await PorfolioUserService.authenticate(useroremail=form_data.username, password=form_data.password)
+    user = await UserService.authenticate(useroremail=form_data.username, password=form_data.password)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -32,8 +31,8 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()) -> Any:
     }
 
 
-@auth_router.post('/check_token', summary="Prueba si el Token es valido", response_model=UserPorfolioSchemaOut)
-async def check_token(porfolio: Porfolio = Depends(get_current_user)) -> str:
+@auth_router.post('/check_token', summary="Prueba si el Token es valido", response_model=UserSchemaOut)
+async def check_token(porfolio: User = Depends(get_current_user)) -> str:
     return porfolio
 
 
@@ -55,7 +54,7 @@ async def refresh_token(refresh_token: str = Body(...)):
             headers={"WWW-Authenticate": "Bearer"}
         )
 
-    user = await PorfolioUserService.get_user_by_id(token_data.sub)
+    user = await UserService.get_user_by_id(token_data.sub)
 
     if not user:
         raise HTTPException(

@@ -1,20 +1,18 @@
 from beanie import Document, Indexed
-from pydantic import Field, EmailStr, validator
+from pydantic import Field, EmailStr
 from uuid import UUID, uuid4
-from typing import List, Dict, Optional
+from typing import Dict, Optional
 from datetime import datetime
-from src.models.project_model import Project
-from src.models.skill_model import Skill
 
 
-class Porfolio(Document):
-    porfolio_id: UUID = Field(default_factory=uuid4)
+class User(Document):
+    user_id: UUID = Field(default_factory=uuid4)
     # Login
     username: Indexed(str, unique=True)
     email: Indexed(EmailStr, unique=True)
     password: str
 
-    # Normal Data
+    # UserData
     first_name: Optional[str] = None
     last_name: Optional[str] = None
     title: Optional[Dict[str, str]] = None
@@ -23,16 +21,11 @@ class Porfolio(Document):
     country: Optional[str] = None
     province: Optional[str] = None
 
-    # Porfolio
-    projects: Optional[List[Project]] = None
-    skills: Optional[List[Skill]] = None
-
-    # Creation
     date_created: datetime = datetime.now()
     date_modified: datetime = datetime.now()
 
     def __repr__(self) -> str:
-        return f"<Porfolio {self.username}>"
+        return f"<User {self.username}>"
 
     def __str__(self) -> str:
         return self.username
@@ -41,18 +34,6 @@ class Porfolio(Document):
         return hash(self.username)
 
     def __eq__(self, other: object) -> bool:
-        if isinstance(other, Porfolio):
+        if isinstance(other, User):
             return self.username == other.username
         return False
-
-    @property
-    def create(self) -> datetime:
-        return self.id.generation_time
-
-    @classmethod
-    async def by_email(cls, email: str) -> "Porfolio":
-        return await cls.find_one(cls.email == email)
-
-    @classmethod
-    async def by_username(cls, username: str) -> "Porfolio":
-        return await cls.find_one(cls.username == username)

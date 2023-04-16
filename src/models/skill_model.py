@@ -1,28 +1,23 @@
-from typing import List, Dict
-from pydantic import BaseModel
-from datetime import datetime
-from enum import Enum
+from beanie import Document
+from pydantic import Field
+from uuid import UUID, uuid4
 
-
-class Skill(BaseModel):
-    class ProficiencyEnum(str, Enum):
-        beginner = 'Beginner'
-        intermediate = 'Intermediate'
-        advanced = 'Advanced'
-
+class Skill(Document):
+    skill_id: UUID = Field(default_factory=uuid4)
+    user_id: UUID
     name: str
-    proficiency: ProficiencyEnum
+    level: int
 
-    date_created: datetime = datetime.now()
-    date_modified: datetime = datetime.now()
+    def __repr__(self) -> str:
+        return f"<Skill {self.name}>"
 
+    def __str__(self) -> str:
+        return self.name
 
-""" 
-Format
+    def __hash__(self) -> int:
+        return hash(self.name)
 
-{
-    "name": "Javascript",
-    "proficiency": "Intermediate"
-},
-
-"""
+    def __eq__(self, other: object) -> bool:
+        if isinstance(other, Skill):
+            return self.name == other.name
+        return False
