@@ -3,6 +3,7 @@ from pydantic import Field, EmailStr
 from uuid import UUID, uuid4
 from typing import Dict, Optional
 from datetime import datetime
+from src.models.general_model import Translation
 
 
 class User(Document):
@@ -15,9 +16,9 @@ class User(Document):
     # UserData
     first_name: Optional[str] = None
     last_name: Optional[str] = None
-    title: Optional[Dict[str, str]] = None
+    title: Translation = None
     phone: Optional[str] = None
-    description: Optional[Dict[str, str]] = None
+    description: Translation = None
     country: Optional[str] = None
     province: Optional[str] = None
 

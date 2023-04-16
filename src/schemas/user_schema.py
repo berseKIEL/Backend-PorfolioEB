@@ -2,6 +2,7 @@ from pydantic import BaseModel, Field, EmailStr
 from typing import Dict, Optional
 from uuid import UUID
 from datetime import datetime
+from src.models.general_model import Translation
 
 
 class UserSchemaIn(BaseModel):
@@ -18,9 +19,9 @@ class UserUpdate(BaseModel):
     username: Optional[str]
     first_name: Optional[str]
     last_name: Optional[str]
-    title: Optional[Dict[str, str]]
+    title: Optional[Translation]
     phone: Optional[str]
-    description: Optional[str]
+    description: Optional[Translation]
     country: Optional[str]
     province: Optional[str]
 
@@ -30,8 +31,8 @@ class UserSchemaOut(BaseModel):
     username: str
     first_name: str = None
     last_name: str = None
-    title: Dict[str, str] = None
+    title: Translation = None
     phone: str = None
-    description: Dict[str, str] = None
+    description: Translation = None
     country: str = None
     province: str = None
