@@ -13,7 +13,6 @@ class SkillUpdate(BaseModel):
     level: Optional[int] = Field(..., title="Level")
     
 class SkillOut(BaseModel):
-    skill_id: UUID
     name: str
     level: str
     created_at: datetime

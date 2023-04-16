@@ -26,7 +26,6 @@ class ProjectUpdate(BaseModel):
 
 
 class ProjectOut(BaseModel):
-    project_id: UUID
     name: Dict[str, str]
     description: Dict[str, str]
     technologies_used: List[str]
