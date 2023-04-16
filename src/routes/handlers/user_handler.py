@@ -17,7 +17,8 @@ async def create_user(data: UserSchemaIn):
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Un usuario con esas credenciales ya existe."
         )
-        
+
+
 @user_router.put('/update', summary="Actualiza la información y los datos de un usuario", response_model=UserSchemaOut)
 async def update_user(data: UserUpdate, current_user: User = Depends(get_current_user)):
     try:
