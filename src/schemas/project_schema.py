@@ -3,6 +3,7 @@ from typing import Optional, List, Dict
 from uuid import UUID
 from datetime import datetime
 
+
 class ProjectCreate(BaseModel):
     name: str = Field(..., title="Name", min_length=2, max_length=50)
     description: Dict[str, str] = Field(..., title="Description")
@@ -17,10 +18,12 @@ class ProjectUpdate(BaseModel):
     name: Optional[str] = Field(..., title="Name", min_length=2, max_length=50)
     description: Optional[Dict[str, str]] = Field(..., title="Description")
     technologies_used: Optional[List[str]]
-    repo_link: Optional[str] = Field(..., title="Repository Link", min_length=2, max_length=120)
+    repo_link: Optional[str] = Field(..., title="Repository Link",
+                                     min_length=2, max_length=120)
     image_link: Optional[List[str]]
     date_start: Optional[datetime]
     date_finish: Optional[datetime]
+
 
 class ProjectOut(BaseModel):
     project_id: UUID

@@ -37,3 +37,6 @@ class User(Document):
         if isinstance(other, User):
             return self.username == other.username
         return False
+
+    class Settings:
+        name = 'users'
