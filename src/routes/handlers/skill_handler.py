@@ -16,7 +16,7 @@ async def list_skills(current_user: User = Depends(get_current_user)):
     return await SkillService.list_skills(current_user)
 
 
-@skill_router.post('/create', summary="Crea habilidades para un usuario", response_model=Skill)
+@skill_router.post('/create', summary="Crea habilidades para un usuario", response_model=SkillOut)
 async def create_skill(data: SkillCreate, current_user: User = Depends(get_current_user)):
     return await SkillService.create_skill(data, current_user)
 

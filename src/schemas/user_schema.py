@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field, EmailStr
-from typing import Dict
+from typing import Dict, Optional
 from uuid import UUID
 from datetime import datetime
 
@@ -13,21 +13,20 @@ class UserSchemaIn(BaseModel):
                           description="Password")
 
 
-class UpdateUser(BaseModel):
-    email: str
-    username: str
-    first_name: str
-    last_name: str
+class UserUpdate(BaseModel):
+    email: Optional[EmailStr]
+    username: Optional[str]
+    first_name: Optional[str]
+    last_name: Optional[str]
     title: Dict[str, str]
-    phone: str
-    description: str
-    country: str
-    province: str
+    phone: Optional[str]
+    description: Optional[str]
+    country: Optional[str]
+    province: Optional[str]
 
 
 class UserSchemaOut(BaseModel):
-    user_id: UUID
-    email: str
+    email: EmailStr
     username: str
     first_name: str = None
     last_name: str = None

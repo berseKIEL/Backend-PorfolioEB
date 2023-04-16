@@ -1,4 +1,4 @@
-from src.schemas.user_schema import UserSchemaIn
+from src.schemas.user_schema import UserSchemaIn, UserUpdate
 from src.models.user_model import User
 from src.core.security import get_password
 from src.core.security import verify_password
@@ -32,6 +32,18 @@ class UserService():
             return None
 
         return user
+    
+    @staticmethod
+    async def get_user(useroremail: str) -> Optional[User]:
+        # Obtener usuario por email
+        user = await UserService.get_user_by_email(email=useroremail)
+        if not user:
+            # Obtener usuario por correo
+            user = await UserService.get_user_by_username(username=useroremail)
+            if not user:
+                return None
+
+        return user
 
     @staticmethod
     async def get_user_by_email(email: str) -> Optional[User]:
@@ -46,4 +58,11 @@ class UserService():
     @staticmethod
     async def get_user_by_id(id: UUID) -> Optional[User]:
         user = await User.find_one(User.user_id == id)
+        return user
+
+    @staticmethod
+    async def update_user(user_id: UUID, data: UserUpdate):
+        user = await UserService.get_user(user_id)
+        await user.update({"$set": data.dict(exclude_unset=True)})
+        await user.save()
         return user
