@@ -27,16 +27,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.on_event("startup")
 async def app_init():
     """
         Inicializar de servicios de base de datos
     """
     db_conn = AsyncIOMotorClient(settings.MONGO_CONNECTION).PorfolioEB
-    
+
     await init_beanie(
         database=db_conn,
         document_models=[User, Skill, Project]
     )
-        
+
 app.include_router(router, prefix=settings.API_V1_ROUTE)

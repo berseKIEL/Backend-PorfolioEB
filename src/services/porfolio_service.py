@@ -8,7 +8,7 @@ class PorfolioService():
     @staticmethod
     async def get_porfolio(username: str):
         porfolio = {}
-
+        
         userData = await UserService.get_user(username)
 
         if userData:

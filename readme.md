@@ -8,6 +8,12 @@ El objetivo de este repositorio es posibilitar a los usuarios crear, a traves de
 - Las Habilidades son las dichosas que lo hacen reconocer como programador
 - Los Proyectos es el curriculum que desmuestra dichas habilidades
 
+Layout del Porfolio:
+- Usuario (Usuario, Email, Contraseña, Nombre, Apellido, Titulo, Telefono, Descripción, Pais, Provincia)
+- Habilidades (Titulo, Nivel)
+- Lenguaje (Titulo, Nivel)
+- Projecto (Titulo, Descripción, TecnologiasUsadas, RepoLink, ImagenLink, FechaInicio, FechaFin)
+- Educacion (Titulo, Escuela, FechaInicio, FechaFin)
 
 # API
 
